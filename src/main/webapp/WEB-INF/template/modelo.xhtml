@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+    <title>Sistema POO - Sistema de Ensino</title>
+</h:head>
+<h:body style="padding-top: 50px; padding-bottom: 20px;">
+    <b:navBar brand="Sistema POO " brandHref="index.xhtml" inverse="true" fixed="top">
+        <b:navbarLinks>
+            <b:navLink value="Gestão de Funcionários" href="funcionario.xhtml"/>
+            <b:navLink value="Gestão de Professores" href="professor.xhtml"/>
+            <b:navLink value="Folha de Pagamento" href="folha.xhtml"/>
+            <b:navLink value="Gestão de Cursos" href="curso.xhtml"/>
+            <b:navLink value="Gestão de Alunos" href="aluno.xhtml"/>
+            <b:navLink value="Gestão de Notas" href="nota.xhtml"/>
+        </b:navbarLinks>
+    </b:navBar>
+
+    <b:jumbotron style="min-height: 520px;">
+        <ui:insert name="principal"/>
+    </b:jumbotron>
+
+    <b:container>
+        <hr/>
+        <div style="text-align: center;">
+            <p>© Sistema POO - 2020</p>
+        </div>
+    </b:container>
+</h:body>
+</html>

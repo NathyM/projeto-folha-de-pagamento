@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+      <title>Sistema POO - Sistema de Ensino| Cadastro de Notas</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="./WEB-INF/template/modelo.xhtml">
+        <ui:define name="principal">
+            <b:container style="width:940px; text-align: center;">
+        <b:navBar brand="Sistema POO| Web | Professor" brandHref="index.xhtml" inverse="true" fixed="top"></b:navBar>
+                 <b:navbarLinks>
+                 <b:dropMenu value="Cadastros">
+                        <b:navLink value="Funcionário" href="CadFuncionario.xhtml"></b:navLink>
+                       <b:navLink value="Professor" href="CadProfessor.xhtml"></b:navLink>
+                       <b:navLink value="Aluno" href="CadAluno.xhtml"></b:navLink>
+                       <b:navLink value="Curso" href="CadCurso.xhtml"></b:navLink>
+                       <b:navLink></b:navLink>
+                   </b:dropMenu>
+                       <b:dropMenu value="Consulta">
+                            <b:navLink value="Calcular Salário" href="FolhaPagamento.xhtml"></b:navLink>
+                            <b:navLink value="Calcular Notas" href="Notas.xhtml"></b:navLink>
+                       </b:dropMenu>
+                   </b:navbarLinks>
+                    <p/>
+                                        <b:panelGrid columns="2">
+        <center>        <h2>Cadastro de Professor</h2>         </center>
+        </b:panelGrid>
+                   <b:form horizontal="true">
+                       <b:panelGrid columns="2">
+                    <b:inputText value="#{professorBean.professor.id}" label="ID do Professor" colMd="10" labelColMd="6"/>
+                    <b:inputText value="#{professorBean.professor.nome}"  label="Nome do Professor" colMd="10" labelColMd="6"/>
+                    <b:inputText value="#{professorBean.professor.salario}" label="Salário do Professor" colMd="10" labelColMd="6"/>
+                    <b:inputText value="#{professorBean.professor.rg}" label="RG  do Professor" colMd="10" labelColMd="6"/>
+                    <b:inputText value="#{professorBean.professor.cpf}" label="CPF  do Professor" colMd="10" labelColMd="6"/>
+                    <b:inputText value="#{professorBean.professor.cargo}" label="Cargo  do Professor" colMd="10" labelColMd="6"/>
+                    <b:inputText value="#{professorBean.professor.disciplinas}" label="Disciplinas  do Professor" colMd="10" labelColMd="6"/>
+                    <b:inputText value="#{professorBean.professor.areaInteresse}"  label="Áreas de Interesse" colMd="10" labelColMd="6"/> 
+                      </b:panelGrid>
+                    <b:panelGrid columns="3">
+                        <b:commandButton value="Salvar" action="#{professorBean.cadastrarProfessor()}" style="width:120px; margin: 20px 0;"/>
+                        <b:commandButton value="Atualizar" action="#{professorBean.atualizar(professorBean.professor)}" style="width:120px; margin: 20px 0;"/>
+                        <b:commandButton value="Remover" action="#{professorBean.excluirProfessor(professorBean.professor)}" style="width:120px; margin: 20px 0;"/>
+                    </b:panelGrid>
+                </b:form>
+                     <b:form horizontal="true">
+                    <h2>Lista de Professores</h2>
+                    <b:inputText value="#{professorBean.buscaNome}" label="Busca por Nome" colMd="10" labelColMd="2"/>
+                    <b:inputText value="#{professorBean.buscaId}"  label="Busca por ID" colMd="10" labelColMd="2"/>
+                    <b:inputText value="#{professorBean.buscaAreaInteresse}"  label="Busca por Áreas de Interesse" colMd="10" labelColMd="2"/>
+                    <b:inputText value="#{professorBean.buscaDisciplinas}"  label="Busca por Disciplinas" colMd="10" labelColMd="2"/>
+                    <b:panelGrid columns="4">
+                        <b:commandButton value="Buscar Nome" action="#{professorBean.consultarPorNome(professorBean.buscaNome)}" style="width:120px; margin: 20px 0;"/>
+                        <b:commandButton value="Buscar ID" action="#{professorBean.consultarPorId(professorBean.buscaId)}" style="width:120px; margin: 20px 0;"/>
+                        <b:commandButton value="Buscar Área" action="#{professorBean.consultarPorAreaInteresse(professorBean.buscaAreaInteresse)}" style="width:120px; margin: 20px 0;"/>
+                        <b:commandButton value="Buscar Disciplina" action="#{professorBean.consultarPorDisciplinas(professorBean.buscaDisciplinas)}" style="width:120px; margin: 20px 0;"/>
+                    </b:panelGrid>
+                      <b:dataTable
+                            value="#{professorBean.professores}"
+                            var="professor"
+                            excel="true"
+                            csv="true"
+                            pdf="true"
+                            print="true">
+                        <b:dataTableColumn value="#{professor.id}" />
+                        <b:dataTableColumn value="#{professor.nome}" />
+                        <b:dataTableColumn value="#{professor.salario}" />
+                        <b:dataTableColumn value="#{professor.rg}" />
+                        <b:dataTableColumn value="#{professor.cpf}" />
+                        <b:dataTableColumn value="#{professor.cargo}" />
+                        <b:dataTableColumn value="#{professor.disciplinas}" />
+                        <b:dataTableColumn value="#{professor.areasInteresse}" />
+                        </b:dataTable>
+                       </b:form>
+                <p />
+            </b:container>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

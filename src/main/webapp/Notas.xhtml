@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+      <title>Sistema POO - Sistema de Ensino| Cadastro de Notas</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="./WEB-INF/template/modelo.xhtml">
+        <ui:define name="principal">
+            <b:container style="width:940px; text-align: center;">
+        <b:navBar brand="Sistema POO| Web | Notas dos Alunos" brandHref="index.xhtml" inverse="true" fixed="top"></b:navBar>
+                   <b:navbarLinks>
+                 <b:dropMenu value="Cadastros">
+                     <b:navLink value="Funcionário" href="CadFuncionario.xhtml"></b:navLink>
+                    <b:navLink value="Professor" href="CadProfessor.xhtml"></b:navLink>
+                    <b:navLink value="Aluno" href="CadAluno.xhtml"></b:navLink>
+                    
+                    <b:navLink></b:navLink>
+                   </b:dropMenu>
+                       <b:dropMenu value="Consultas">
+                        <b:navLink value="Calcular Salário" href="FolhaPagamento.xhtml"></b:navLink>   
+                       </b:dropMenu>
+                   </b:navbarLinks>
+            <p/>
+         <b:panelGrid columns="2">
+        <center>        <h2>Cadastro de Nota</h2>         </center>
+        </b:panelGrid>
+                <p/>
+                <b:form horizontal="true">
+                    <b:panelGrid columns="2">
+                       <b:inputText value="#{notasBean.aluno.idAluno}" label="ID do Aluno" colMd="10" labelColMd="6"/>
+                       <b:inputText value="#{notasBean.aluno.cpf}"  label="CPF do aluno" colMd="10" labelColMd="6"/>
+                       <b:inputText value="#{notasBean.aluno.rg}"  label="RG do aluno" colMd="10" labelColMd="6"/>
+                      <b:inputText value="#{notasBean.aluno.sexo}"  label="Sexo" colMd="10" labelColMd="6"/>
+                      <b:inputText value="#{notasBean.aluno.dataNascimento}"  label="Data de Nascimento" colMd="10" labelColMd="6"/>
+                     <b:inputText value="#{notasBean.aluno.nome}"  label="Nome do Aluno" colMd="10" labelColMd="4"/>
+                    <b:inputText value="#{notasBean.nota.nota1}" label="Primeira Nota" colMd="10" labelColMd="4"/>
+                    <b:inputText value="#{notasBean.nota.nota2}" label="Segunda Nota" colMd="10" labelColMd="4"/>
+                    <b:inputText value="#{notasBean.nota.nota3}" label="Terceira Nota " colMd="10" labelColMd="4"/>
+                    <b:inputText value="#{notasBean.nota.nota4}" label="Quarta Nota " colMd="10" labelColMd="4"/>
+                    </b:panelGrid>
+                    <b:panelGrid columns="3">
+                    <h:commandButton value="Cadastrar Nota" action="#{notasBean.inserirNota()}" style="width:120px; margin: 20px 0;"/>
+                    <h:commandButton value="Alterar Nota" action="#{notasBean.editarNota(notasBean.aluno)}" style="width:120px; margin: 20px 0;"/>
+                    <h:commandButton value="Calcular Nota " action="#{notasBean.calcularNotaFinal()}" style="width:120px; margin: 20px 0;"/>
+                    </b:panelGrid>
+                </b:form>
+
+                <b:form horizontal="true">
+                            <b:panelGrid columns="2">        <center>        <h2>Lista de Alunos</h2>         </center>         </b:panelGrid>
+
+                    <b:inputText value="#{alunoBean.buscaNome}"  label="Busca  Nome" colMd="10" labelColMd="3"/>
+                    <b:inputText value="#{alunoBean.buscaStatus}" label="Buscar Status" colMd="10" labelColMd="3"/>
+                    <b:panelGrid columns="2">
+                        <b:commandButton value="Buscar Nome" action="#{alunoBean.consultarPorNome(alunoBean.buscaNome)}" style="width:120px; margin: 20px 0;"/>
+                        <b:commandButton value="Buscar Status" action="#{alunoBean.consultarPorStatus(alunoBean.buscaStatus)}" style="width:120px; margin: 20px 0;"/>
+                    </b:panelGrid>
+                    <b:dataTable
+                        value="#{notasBean.alunos}"
+                            var="notas"
+                            excel="true"
+                            csv="true"
+                            pdf="true"
+                            print="true">
+                        <b:dataTableColumn value="#{aluno.idAluno}" />
+                         <b:dataTableColumn value="#{aluno.cpf}" />
+                        <b:dataTableColumn value="#{aluno.nome}" />
+                        <b:dataTableColumn value="#{aluno.rg}" />
+                        <b:dataTableColumn value="#{aluno.dataNascimento}" />
+                        <b:dataTableColumn value="#{aluno.sexo}" />
+                        <b:dataTableColumn value="#{nota.nota1}" />
+                        <b:dataTableColumn value="#{nota.nota2}" />
+                        <b:dataTableColumn value="#{nota.nota3}" />
+                        <b:dataTableColumn value="#{nota.nota4}" />
+                        <b:dataTableColumn value="#{nota.notaFinal}" />
+                        <b:dataTableColumn value="#{aluno.status}" />
+                    </b:dataTable>
+                </b:form>
+
+        
+                <p />
+            </b:container>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

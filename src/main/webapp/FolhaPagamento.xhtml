@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+      <title>Sistema POO - Sistema de Ensino| Cadastro de Alunos</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="./WEB-INF/template/modelo.xhtml">
+        <ui:define name="principal">
+            <b:container style="width:940px; text-align: center;">
+        <b:navBar brand="Sistema POO| Web | Calcular Salário" brandHref="index.xhtml" inverse="true" fixed="top"></b:navBar>
+                   <b:navbarLinks>
+                 <b:dropMenu value="Cadastros">
+                     <b:navLink value="Funcionário" href="CadFuncionario.xhtml"></b:navLink>
+                    <b:navLink value="Professor" href="CadProfessor.xhtml"></b:navLink>
+                    <b:navLink value="Aluno" href="CadAluno.xhtml"></b:navLink>
+                    
+                    <b:navLink></b:navLink>
+                   </b:dropMenu>
+                       <b:dropMenu value="Consultas">
+                        <b:navLink value="Calcular Salário" href="FolhaPagamento.xhtml"></b:navLink>   
+                       </b:dropMenu>
+                </b:navbarLinks>
+         <h2>Folha de Pagamento</h2> 
+        
+                 <b:form>
+                <b:inputText value="#{funcionarioBean.funcionario.id}" label="Identificação funcional" colMd="10" labelColMd="3"/> <p />
+                <b:inputText value="#{folhaPagamentoBean.salarioBruto}" label="Salário Bruto         " colMd="10" labelColMd="2"/> <p />
+                <h:commandButton value="Calcular Folha de Pagamento" action="#{folhaPagamentoBean.CalcularFolhaPagamento(funcionario)}"  /> 
+                 </b:form> <p/>
+                <b:form>
+                <b><h:outputText value="INSS:" /> </b><h:outputText value="#{folhaPagamentoBean.inss}"  /> <p />
+                <b><h:outputText value="IRRF:" /> </b><h:outputText value="#{folhaPagamentoBean.irrf}" /> <p />
+                <b><h:outputText value="Salário Líquido:" /></b> <h:outputText value="#{folhaPagamentoBean.salarioLiquido}" /> <p />
+                </b:form>
+    
+                      <h:form >
+         <h4>Lista de Funcionários</h4> 
+                    <b:inputText value="#{funcionarioBean.buscaPorNome}"  label="Busca por Nome" colMd="10" labelColMd="2"/>
+                        <h:panelGrid columns="1">
+                        <h:commandButton value="Buscar Nome" action="#{funcionarioBean.consultarPorNome(funcionarioBean.buscaPorNome)}" style="width:120px; margin: 20px 0;"/>
+                        </h:panelGrid>
+                    <b:inputText value="#{funcionarioBean.buscaPorId}"  label="Busca por ID" colMd="10" labelColMd="2"/>
+
+                     <h:panelGrid columns="1">
+                        <h:commandButton value="Buscar ID" action="#{funcionarioBean.consultarPorId(funcionarioBean.buscaPorId)}" style="width:120px; margin: 20px 0;"/>
+                    </h:panelGrid>
+                    <p />
+                    <b:dataTable
+                            value="#{funcionarioBean.funcionarios}"
+                            var="funcionario"
+                            excel="true"
+                            csv="true"
+                            pdf="true"
+                            print="true">
+                        <b:dataTableColumn value="#{funcionario.id}" />
+                        <b:dataTableColumn value="#{funcionario.nome}" />
+                        <b:dataTableColumn value="#{funcionario.salario}" />
+                        <b:dataTableColumn value="#{funcionario.rg}" />
+                        <b:dataTableColumn value="#{funcionario.cpf}" />
+                        <b:dataTableColumn value="#{funcionario.cargo}" />
+                    </b:dataTable>
+                    <p />
+                 </h:form>
+               <p />
+            </b:container>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
